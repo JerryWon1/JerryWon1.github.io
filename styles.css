@@ -1,264 +1,385 @@
+/* Apple-style minimalist theme for the personal website */
+
 :root {
-    /* variables */
-    --cg-black: rgb(30, 32, 32);
-    --cg-blue: rgb(36, 94, 255);
-    --cg-grey: rgb(243, 243, 243);
-    --cg-white: rgb(255, 255, 255);
+    --bg: #6d75aa;
+    --surface: #c1c5f6;
+    --muted: #000000;
+    --subtle: #000000;
+    --accent: #0071e3;
+    --card-radius: 14px;
+    --nav-height: 64px;
+    --container: 1100px;
+    --nav-bg: #939ff0;
+    --nav-text: #000000;
 }
 
-html {
+html,
+body {
     height: 100%;
 }
 
 body {
-    background: var(--cg-grey);
-    position: relative;
-    min-height: 100vh;
-    padding: 0;
     margin: 0;
-    font-family: monospace;
+    padding-top: var(--nav-height);
+    background: var(--bg);
+    color: var(--muted);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.45;
 }
 
-/* CSS for navigation */
-
+/* ===== Navigation ===== */
 .navbar {
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
     top: 0;
-    width: 100%;
-    height: 7%;
-    z-index: 10;
-
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    background: var(--nav-bg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    z-index: 60;
+    backdrop-filter: blur(6px);
+}
 
-    background-color: var(--cg-black);
-    color: var(--cg-white);
-    padding: 0px 0px;
-
-    /* Debug border */
-    /* border: solid red; */
+.logo a {
+    text-decoration: none;
+    color: var(--nav-text);
+    font-weight: 600;
+    font-size: 1.05rem;
 }
 
 .nav-list {
     display: flex;
-    flex-direction: row;
-    position: relative;
-    right: 30px;
+    gap: 20px;
     list-style: none;
-
-    /* Debug border */
-    /* border: solid blue; */
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
-
-.navbar a {
-    color: var(--cg-white);
-    font-weight: bold;
-    margin: 0 12px;
+.nav-list a {
+    color: var(--nav-text);
     text-decoration: none;
-    letter-spacing: 2px;
-
-    font-family: monospace;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px;
+    border-radius: 8px;
+    opacity: 0.95;
+}
+.nav-list a:hover {
+    color: var(--nav-text);
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.04);
 }
 
-.navbar a:hover {
-    color: var(--cg-blue);
-    text-decoration: underline;
+/* container utility */
+.container {
+    max-width: var(--container);
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
 }
 
-.navbar a:active {
-    color: var(--cg-blue);
-}
-
-.logo a {
-    font-family: Georgia;
-}
-
-.logo a:hover {
-    text-decoration: None;
-}
-
+/* ===== Main layout ===== */
 main {
-    padding: 0 20px 40px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    gap: 18px;
 }
 
 .page-title {
-    display: flex;
-    justify-content: center;
-    font-size: 40px;
-    font-family: Georgia;
-}
-
-/* CSS for portfolio grid */
-
-.project {
-    display: flex;
-    flex-direction: row;
-    max-width: 100%;
-    margin: 1em 0 2em 0;
-
-    /* Debug border */
-    /* border: 2px solid blue; */
-}
-
-.item-link {
-    width: 70%;
-
-    /* Debug border */
-    /* border: 2px solid red; */
-}
-
-.project-image {
-    object-fit: cover;
     width: 100%;
-    height: 500px;
-    flex-basis: 50px;
-    flex-grow: 2;
-
-    /* Debug border */
-    /* border: 2px solid black; */
+    margin: 36px 0 12px 0;
 }
-
-.project-details {
-    display: flex;
-    background-color: var(--cg-white);
-    width: 30%;
-    height: 500px;
-    flex-shrink: 1;
-    padding: 0 20px;
-    margin: 0px;
-    line-height: 1.5;
-    overflow: scroll;
-
-    flex-direction: column;
+.page-title h1 {
+    font-size: 44px;
+    margin: 0;
     text-align: center;
-    justify-content: center;
-
-    /* Debug border */
-    /* border: 2px solid green; */
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: -0.02em;
+}
+.page-title p.lead {
+    max-width: 720px;
+    margin: 12px auto 0;
+    color: var(--subtle);
+    text-align: center;
+    font-size: 18px;
 }
 
-.project-details a {
-    color: var(--cg-black);
-    text-decoration: none;
-    font-weight: bold;
-    letter-spacing: 1px;
+/* ===== Cards & content ===== */
+.card,
+.about,
+.project-details,
+.resume {
+    background: var(--surface);
+    border-radius: var(--card-radius);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.06);
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.project-details a:hover {
-    color: var(--cg-blue);
-    text-decoration: underline;
+/* ===== Contact form box ===== */
+#contact-form {
+    max-width: 720px;
+    margin: 18px auto 36px auto;
+    background: var(--surface);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.project-details {
-    font-weight: lighter;
+#contact-form label {
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+}
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    margin-bottom: 14px;
+    background: transparent;
+    color: var(--muted);
+}
+#contact-form input[type="submit"] {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-.project-name {
-    font-weight: bold;
-    font-size: 20px;
+/* smaller screens spacing for contact box */
+@media (max-width: 700px) {
+    #contact-form {
+        margin: 12px 18px;
+        padding: 20px;
+    }
 }
-
-/* CSS for home page */
 
 .about {
     display: flex;
+    gap: 28px;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    max-width: var(--container);
+    width: 100%;
+    margin: 16px 0;
 }
-
 .about-image img {
-    max-width: 300px;
-    border-radius: 3px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    width: 320px;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    object-fit: cover;
 }
-
 .about-text {
     flex: 1;
-    margin-left: 20px;
+    color: var(--subtle);
 }
-
-.about-text h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
 .about-text p {
+    margin: 0 0 12px 0;
     font-size: 16px;
-    line-height: 1.5;
 }
 
-/* CSS for resume page */
+/* Projects */
+.project {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    max-width: var(--container);
+    width: 100%;
+    margin-bottom: 28px;
+}
+.project img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+}
+.project-details {
+    width: 360px;
+    padding: 28px;
+    box-sizing: border-box;
+}
+.project-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--muted);
+    margin: 0 0 8px 0;
+}
+.project-description {
+    color: var(--subtle);
+    margin: 0;
+}
+.project-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+.project-link:hover {
+    text-decoration: underline;
+}
 
-.button {
-    background-color: var(--cg-black);
-    border: none;
-    color: var(--cg-white);
-
-    font-family: monospace;
-
-    padding: 5px 7px;
+/* stacked layout for portfolio page: welcome -> screenshot -> details */
+.project.stack {
+    /* default stacked layout for narrow screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-
-    border-radius: 2px;
+}
+.project.stack p {
+    max-width: 720px;
+    margin: 0 auto 18px auto;
+    color: var(--subtle);
+}
+.project.stack .project-image {
+    width: 100%;
+    max-width: 900px;
+}
+.project.stack .project-image img {
+    border-radius: 12px;
+}
+.project.stack .project-details {
+    width: 360px;
+    margin-top: 18px;
 }
 
-.button:hover {
-    background-color: var(--cg-blue);
+/* On wide screens: welcome centered above, then screenshot (left) + details (right) */
+@media (min-width: 900px) {
+    .project.stack {
+        display: grid;
+        /* left column grows to fit screenshot, right column fixed for details card */
+        grid-template-columns: minmax(420px, 1fr) 380px;
+        grid-template-rows: auto 1fr;
+        gap: 28px 36px;
+        grid-template-areas: "welcome welcome" "image details";
+        align-items: center; /* vertically center details next to image */
+        text-align: left;
+    }
+    .project.stack > p {
+        grid-area: welcome;
+        justify-self: center;
+        text-align: center;
+    }
+    .project.stack .project-image {
+        grid-area: image;
+        align-self: center;
+        justify-self: center;
+        width: 100%;
+    }
+    .project.stack .project-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .project.stack .project-details {
+        grid-area: details;
+        margin-top: 0;
+        align-self: center;
+    }
 }
 
-.resume h2 {
-    font-family: Georgia;
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+.button.ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* CSS for contact form */
-
+/* Forms */
 label {
     display: block;
     margin-bottom: 8px;
-    font-family: Georgia;
-    font-weight: bold;
+    color: var(--muted);
+    font-weight: 600;
 }
-
 input[type="text"],
 input[type="email"],
 textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    resize: none;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: transparent;
+    color: var(--muted);
+    box-sizing: border-box;
 }
-
-/* Add some spacing to the form */
 form {
-    width: 500px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 540px;
 }
 
-/* CSS for footer */
-
+/* Footer */
 .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--cg-black);
-    color: var(--cg-white);
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    height: 2.5rem;
+    padding: 28px 0;
+    color: var(--subtle);
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1000px) {
+    .about {
+        flex-direction: column;
+        align-items: center;
+    }
+    .project {
+        flex-direction: column;
+    }
+    .project-details {
+        width: 100%;
+    }
+    .page-title h1 {
+        font-size: 36px;
+    }
+}
+@media (max-width: 480px) {
+    .nav-list {
+        gap: 10px;
+    }
+    .logo a {
+        font-size: 0.95rem;
+    }
+    .page-title h1 {
+        font-size: 28px;
+    }
+    .about-image img {
+        width: 220px;
+    }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }
